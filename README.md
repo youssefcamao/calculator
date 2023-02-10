@@ -1,5 +1,7 @@
 # Praktikantenaufgaben
 
+Dateien herunterladen und mit Visual Studio Code öffnen
+
 ## Aufgabe 1
 Fehlende Buttons 1,2,3,7,8,9,0,-,/,* hinzufügen und in eine vernünftige Reihenfolge bringen
 
