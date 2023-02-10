@@ -11,7 +11,8 @@ function handleKeyClick(event) {
 
   switch (selectedSign) {
     case '=':
-      inputbox.value = evaluateExpression(inputbox.value);
+      if (inputbox.value !== "")
+        inputbox.value = evaluateExpression(inputbox.value);
       break;
     case 'AC':
       inputbox.value = '';
@@ -30,7 +31,9 @@ function evaluateExpression(expression) {
   } else if (expression.includes('-')) {
     result = performSubtraction(expression);
   }
-
+  if (result === undefined) {
+    result = expression
+  }
   return result;
 }
 
