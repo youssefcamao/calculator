@@ -1,54 +1,45 @@
-const inputbox_ID = "inputbox";
-const calculate_button_ID = "calculate-button";
-const key_class = "key";
-
-const inputbox = document.getElementById(inputbox_ID);
-const keys = document.getElementsByClassName(key_class);
-const calculateButton = document.getElementById(calculate_button_ID);
+const inputbox = document.getElementById('inputbox');
+const calculateButton = document.getElementById('calculate-button');
+const keys = document.getElementsByClassName('key');
 
 for (const key of keys) {
-  key.addEventListener("click", function (event) {
-    let selectedsign = event.target.textContent;
-
-    if (selectedsign === "=") {
-      inputbox.value = result(inputbox.value);
-    } else if (selectedsign === "AC") {
-      inputbox.value = "";
-    } else {
-      inputbox.value += selectedsign;
-    }
-  });
+  key.addEventListener('click', handleKeyClick);
 }
 
-function result(calculate) {
-  let result = 0;
+function handleKeyClick(event) {
+  const selectedSign = event.target.textContent;
 
-  if (calculate.includes("+")) {
-    const operator = "+";
-    const numbers = calculate.split(operator);
-    const number1 = numbers[0];
-    const number2 = numbers[1];
-
-    result = plus(Number(number1), Number(number2));
-  } 
-  else if (calculate.includes("-")) {
-    const operator = "";
-    const numbers = calculate.split(operator);
-    const number1 = numbers[0];
-    const number2 = numbers[1];
-
-    result = minus(Number(number1), Number(number2));
+  switch (selectedSign) {
+    case '=':
+      inputbox.value = evaluateExpression(inputbox.value);
+      break;
+    case 'AC':
+      inputbox.value = '';
+      break;
+    default:
+      inputbox.value += selectedSign;
+      break;
   }
-  // else if(){
+}
 
-  // }
+function evaluateExpression(expression) {
+  let result;
+
+  if (expression.includes('+')) {
+    result = performAddition(expression);
+  } else if (expression.includes('-')) {
+    result = performSubtraction(expression);
+  }
+
   return result;
 }
 
-function plus(a, b) {
+function performAddition(expression) {
+  const [a, b] = expression.split('+').map(Number);
   return a + b;
 }
 
-function minus(a, b) {
-  return
+function performSubtraction(expression) {
+  const [a, b] = expression.split('-').map(Number);
+  return a - b;
 }
